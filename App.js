@@ -53,6 +53,7 @@ async function validateAccess() {
     const { yes } = await inquirer.prompt(questionChange);
     if (yes === "yes") {
       console.log(chalk.green("Change is about to happen..."));
+      changePassword(passwordSafe);
     } else {
       return;
     }
@@ -63,11 +64,17 @@ async function validateAccess() {
 
 validateAccess();
 
-// const content = "Some content!";
+async function changePassword(passwordSafe) {
+  const content = { telefon: "Some Password!" };
 
-// try {
-//   const data = fs.writeFileSync("/Users/joe/test.txt", content);
-//   //file written successfully
-// } catch (err) {
-//   console.error(err);
-// }
+  try {
+    //file written successfully
+    console.log(chalk.green("Password Changed"));
+  } catch (err) {
+    console.error(err);
+  }
+
+  const newObject = Object.assign(passwordSafe, content);
+  const data = JSON.stringify(newObject);
+  fs.writeFileSync("./db.json", data);
+}
