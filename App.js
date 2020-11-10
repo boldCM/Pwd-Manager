@@ -2,9 +2,6 @@ const chalk = require("chalk");
 
 console.log("wifi=123");
 
-// process.argv.forEach((val, index) => {
-//   console.log(`${index}: ${val}`);
-// });
 const args = process.argv.slice(2);
 args[0];
 const passwordName = args[0];
@@ -37,12 +34,6 @@ const question = [
   },
 ];
 
-// const passwordSafe = {
-//   wifi: "pwChristian",
-//   vercel: "pwVercel",
-//   github: "pwGithub",
-// };
-
 async function validateAccess() {
   const { masterPassword, passwordName } = await inquirer.prompt(question);
   if (masterPassword !== superSavePassword) {
@@ -52,21 +43,7 @@ async function validateAccess() {
   }
   const fs = require("fs");
 
-  const passwordSafe = JSON.parse(
-    fs.readFileSync(
-      "./db.json",
-      "utf8"
-      //   (err, data) => {
-      //     if (err) {
-      //       console.error(err);
-      //       return;
-      //     }
-      //     console.log(JSON.parse(data));
-      //     return JSON.parse(data);
-      //   });
-    )
-  );
-  //   const passwordSafeKeys = Object.keys(passwordSafe);
+  const passwordSafe = JSON.parse(fs.readFileSync("./db.json", "utf8"));
 
   if (passwordSafe[passwordName]) {
     console.log(chalk.green(passwordSafe[passwordName]));
@@ -76,19 +53,3 @@ async function validateAccess() {
 }
 
 validateAccess();
-
-// const password = [
-//   {
-//     type: "input",
-//     name: "name",
-//     organisation: "VSCode",
-//     realPassword: "123",
-//     message: "Which password do you want to know?",
-//   },
-// ];
-
-// inquirer.prompt(password).then((answers) => {
-//   console.log(`Your Password is ${answers["realPassword"]}`);
-
-//   console.log("cannot read organisation of undefined :P :P");
-// });
