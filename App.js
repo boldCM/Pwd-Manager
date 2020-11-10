@@ -16,31 +16,26 @@ const inquirer = require("inquirer");
 
 const superSavePassword = "1234";
 
-const question = [
-  {
-    type: "input",
-    name: "name",
-    message: "What's your name?",
-  },
-  {
-    type: "password",
-    name: "masterPassword",
-    message: "What's your password?",
-  },
-  {
-    type: "input",
-    name: "passwordName",
-    message: "Which password did you forget?",
-  },
-];
+const questionPassword = {
+  type: "password",
+  name: "masterPassword",
+  message: "What's your password?",
+};
+
+const questionForget = {
+  type: "input",
+  name: "passwordName",
+  message: "Which password did you forget?",
+};
 
 async function validateAccess() {
-  const { masterPassword, passwordName } = await inquirer.prompt(question);
+  const { masterPassword } = await inquirer.prompt(questionPassword);
   if (masterPassword !== superSavePassword) {
     console.error(chalk.red("Fake news!"));
     validateAccess();
     return;
   }
+  const { passwordName } = await inquirer.prompt(questionForget);
   const fs = require("fs");
 
   const passwordSafe = JSON.parse(fs.readFileSync("./db.json", "utf8"));

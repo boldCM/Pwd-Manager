@@ -1,5 +1,8 @@
 {
-  "wifi": "pwChristian",
+  "wifi": {
+    "name": "kurzvorzwoelf",
+    "pw": "somePW"
+  },
   "vercel": "pwVercel",
   "github": "pwGithub",
   "facebook": "pwFacebook"
