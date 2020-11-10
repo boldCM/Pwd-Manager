@@ -1,3 +1,5 @@
+const chalk = require("chalk");
+
 console.log("wifi=123");
 
 // process.argv.forEach((val, index) => {
@@ -33,11 +35,11 @@ const question = [
 async function validateAccess() {
   const { masterPassword } = await inquirer.prompt(question);
   if (masterPassword !== superSavePassword) {
-    console.error("Fake news!");
+    console.error(chalk.red("Fake news!"));
     validateAccess();
     return;
   } else {
-    console.log("Alright, come in!");
+    console.log(chalk.green("Alright, come in!"));
   }
 }
 
