@@ -6,3 +6,11 @@ process.argv.forEach((val, index) => {
 
 const args = process.argv.slice(2);
 args[0];
+
+const passwordName = args[0];
+
+if (passwordName === "caro") {
+  console.log("Your password is boldCM");
+} else {
+  console.log("denied access");
+}
