@@ -66,8 +66,9 @@ async function validateAccess() {
       //   });
     )
   );
-  const passwordSafeKeys = Object.keys(passwordSafe);
-  if (passwordSafeKeys.includes(passwordName)) {
+  //   const passwordSafeKeys = Object.keys(passwordSafe);
+
+  if (passwordSafe[passwordName]) {
     console.log(chalk.green(passwordSafe[passwordName]));
   } else {
     console.log(chalk.yellow("Unknown Password"));
