@@ -17,7 +17,7 @@ if (passwordName === "caro") {
 
 const inquirer = require("inquirer");
 
-const superSavePassword = "squirrel";
+const superSavePassword = "1234";
 
 const question = [
   {
@@ -37,11 +37,11 @@ const question = [
   },
 ];
 
-const passwordSafe = {
-  wifi: "pwChristian",
-  vercel: "pwVercel",
-  github: "pwGithub",
-};
+// const passwordSafe = {
+//   wifi: "pwChristian",
+//   vercel: "pwVercel",
+//   github: "pwGithub",
+// };
 
 async function validateAccess() {
   const { masterPassword, passwordName } = await inquirer.prompt(question);
@@ -50,7 +50,22 @@ async function validateAccess() {
     validateAccess();
     return;
   }
+  const fs = require("fs");
 
+  const passwordSafe = JSON.parse(
+    fs.readFileSync(
+      "./db.json",
+      "utf8"
+      //   (err, data) => {
+      //     if (err) {
+      //       console.error(err);
+      //       return;
+      //     }
+      //     console.log(JSON.parse(data));
+      //     return JSON.parse(data);
+      //   });
+    )
+  );
   const passwordSafeKeys = Object.keys(passwordSafe);
   if (passwordSafeKeys.includes(passwordName)) {
     console.log(chalk.green(passwordSafe[passwordName]));
