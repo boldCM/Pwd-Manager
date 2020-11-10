@@ -1,7 +1,1 @@
-{
-  "wifi": { "name": "kurzvorzwoelf", "pw": "somePW" },
-  "vercel": "pwVercel",
-  "github": "pwGithub",
-  "facebook": "pwFacebook",
-  "telefon": "Some Password!"
-}
+{"wifi":{"name":"kurzvorzwoelf","pw":"somePW"},"vercel":{"name":"nameVercel","pw":"pwVercel"},"github":"pwGithub","facebook":"pwFacebook","telefon":"Some Password!","amazon":"shhopping","mich":{"christian":"liebe"}}

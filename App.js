@@ -29,10 +29,28 @@ const questionForget = {
   message: "Which password did you forget?",
 };
 
-const questionChange = {
+const questionNewEntry = {
+  type: "list",
+  name: "newEntry",
+  message: "Do you want to add a new entry?",
+  choices: ["yes", "no"],
+};
+
+const questionName = {
   type: "input",
-  name: "yes",
-  message: "Do you want to change your password? [yes/no]",
+  name: "answerName",
+  message: "What's the name?",
+};
+const questionPW = {
+  type: "input",
+  name: "answerPW",
+  message: "What's the pw?",
+};
+
+const questionTitle = {
+  type: "input",
+  name: "answerTitle",
+  message: "What's the entry for?",
 };
 
 async function validateAccess() {
@@ -48,12 +66,12 @@ async function validateAccess() {
   const passwordSafe = JSON.parse(fs.readFileSync("./db.json", "utf8"));
 
   if (passwordSafe[passwordName]) {
-    console.log(chalk.green(passwordSafe[passwordName]));
+    console.log(chalk.green(`Name: ${passwordSafe[passwordName].name}`));
+    console.log(chalk.green(`Password: ${passwordSafe[passwordName].pw}`));
 
-    const { yes } = await inquirer.prompt(questionChange);
-    if (yes === "yes") {
-      console.log(chalk.green("Change is about to happen..."));
-      changePassword(passwordSafe);
+    const { newEntry } = await inquirer.prompt(questionNewEntry);
+    if (newEntry === "yes") {
+      addEntry(passwordSafe);
     } else {
       return;
     }
@@ -61,11 +79,17 @@ async function validateAccess() {
     console.log(chalk.yellow("Unknown Password"));
   }
 }
-
 validateAccess();
 
-async function changePassword(passwordSafe) {
-  const content = { telefon: "Some Password!" };
+async function addEntry(passwordSafe) {
+  // const objectTitle= answerTitle;
+  const { answerTitle } = await inquirer.prompt(questionTitle);
+
+  const { answerName } = await inquirer.prompt(questionName);
+
+  const { answerPW } = await inquirer.prompt(questionPW);
+
+  const content = { [answerTitle]: { [answerName]: answerPW } };
 
   try {
     //file written successfully
