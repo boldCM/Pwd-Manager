@@ -1,4 +1,5 @@
 const chalk = require("chalk");
+const fs = require("fs");
 
 console.log("wifi=123");
 
@@ -28,23 +29,45 @@ const questionForget = {
   message: "Which password did you forget?",
 };
 
+const questionChange = {
+  type: "input",
+  name: "yes",
+  message: "Do you want to change your password? [yes/no]",
+};
+
 async function validateAccess() {
   const { masterPassword } = await inquirer.prompt(questionPassword);
   if (masterPassword !== superSavePassword) {
     console.error(chalk.red("Fake news!"));
+    // funktion hinzufügen, die den loop abbricht nach 3x falscheingabe..
     validateAccess();
     return;
   }
   const { passwordName } = await inquirer.prompt(questionForget);
-  const fs = require("fs");
 
   const passwordSafe = JSON.parse(fs.readFileSync("./db.json", "utf8"));
 
   if (passwordSafe[passwordName]) {
     console.log(chalk.green(passwordSafe[passwordName]));
+
+    const { yes } = await inquirer.prompt(questionChange);
+    if (yes === "yes") {
+      console.log(chalk.green("Change is about to happen..."));
+    } else {
+      return;
+    }
   } else {
     console.log(chalk.yellow("Unknown Password"));
   }
 }
 
 validateAccess();
+
+// const content = "Some content!";
+
+// try {
+//   const data = fs.writeFileSync("/Users/joe/test.txt", content);
+//   //file written successfully
+// } catch (err) {
+//   console.error(err);
+// }
