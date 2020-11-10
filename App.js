@@ -15,14 +15,46 @@ if (passwordName === "caro") {
 
 const inquirer = require("inquirer");
 
-var questions = [
+const superSavePassword = "squirrel";
+
+const question = [
   {
     type: "input",
     name: "name",
     message: "What's your name?",
   },
+  {
+    type: "password",
+    name: "masterPassword",
+    message: "What's your password?",
+  },
 ];
 
-inquirer.prompt(questions).then((answers) => {
-  console.log(`Hi ${answers["name"]}!`);
-});
+async function validateAccess() {
+  const { masterPassword } = await inquirer.prompt(question);
+  if (masterPassword !== superSavePassword) {
+    console.error("Fake news!");
+    validateAccess();
+    return;
+  } else {
+    console.log("Alright, come in!");
+  }
+}
+
+validateAccess();
+
+// const password = [
+//   {
+//     type: "input",
+//     name: "name",
+//     organisation: "VSCode",
+//     realPassword: "123",
+//     message: "Which password do you want to know?",
+//   },
+// ];
+
+// inquirer.prompt(password).then((answers) => {
+//   console.log(`Your Password is ${answers["realPassword"]}`);
+
+//   console.log("cannot read organisation of undefined :P :P");
+// });
