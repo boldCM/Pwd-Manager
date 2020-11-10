@@ -30,16 +30,32 @@ const question = [
     name: "masterPassword",
     message: "What's your password?",
   },
+  {
+    type: "input",
+    name: "passwordName",
+    message: "Which password did you forget?",
+  },
 ];
 
+const passwordSafe = {
+  wifi: "pwChristian",
+  vercel: "pwVercel",
+  github: "pwGithub",
+};
+
 async function validateAccess() {
-  const { masterPassword } = await inquirer.prompt(question);
+  const { masterPassword, passwordName } = await inquirer.prompt(question);
   if (masterPassword !== superSavePassword) {
     console.error(chalk.red("Fake news!"));
     validateAccess();
     return;
+  }
+
+  const passwordSafeKeys = Object.keys(passwordSafe);
+  if (passwordSafeKeys.includes(passwordName)) {
+    console.log(chalk.green(passwordSafe[passwordName]));
   } else {
-    console.log(chalk.green("Alright, come in!"));
+    console.log(chalk.yellow("Unknown Password"));
   }
 }
 
