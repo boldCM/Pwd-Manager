@@ -1,7 +1,7 @@
 const chalk = require("chalk");
 const fs = require("fs");
 
-console.log("wifi=123");
+console.log("PWD-Manager");
 
 const args = process.argv.slice(2);
 args[0];
@@ -99,6 +99,6 @@ async function addEntry(passwordSafe) {
   }
 
   const newObject = Object.assign(passwordSafe, content);
-  const data = JSON.stringify(newObject);
+  const data = JSON.stringify(newObject, null, 2);
   fs.writeFileSync("./db.json", data);
 }
