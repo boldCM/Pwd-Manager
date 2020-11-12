@@ -1,0 +1,24 @@
+{
+  "name": "pwd-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "private": "true",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boldCM/Pwd-Manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boldCM/Pwd-Manager/issues"
+  },
+  "homepage": "https://github.com/boldCM/Pwd-Manager#readme"
+}

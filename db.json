@@ -1,0 +1,29 @@
+{
+  "wifi": {
+    "name": "kurzvorzwoelf",
+    "pw": "somePW"
+  },
+  "vercel": {
+    "name": "nameVercel",
+    "pw": "pwVercel"
+  },
+  "github": "pwGithub",
+  "facebook": "pwFacebook",
+  "telefon": "Some Password!",
+  "amazon": "shhopping",
+  "mich": {
+    "christian": "liebe"
+  },
+  "Zoom": {
+    "zoom1": "1234"
+  },
+  "slack": {
+    "boldCM": "456"
+  },
+  "klo": {
+    "kacke": "555"
+  },
+  "waschbecken": {
+    "waschen": "becken"
+  }
+}
