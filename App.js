@@ -2,32 +2,24 @@ const chalk = require("chalk");
 const fs = require("fs");
 const { addEntry } = require("./lib/addEntry");
 const inquirer = require("inquirer");
+const { readCommandLineArguments } = require("./lib/commandline");
+const { validateSuperSavePassword } = require("./lib/validation");
+const { runQuestionForget } = require("./lib/questionForget");
+const { readPasswordSafe } = require("./lib/accesDB");
 
-console.log("PWD-Manager");
+// Wie soll meine App aussehen?
+// 0unnötige Argumente nicht anzeigen
+// 1 Name der App
+// 2 Abfrage des Masterpasswordes
+// 3 Will ich ein Password haben oder einen neuen Eintrag hinzufügen?
+// 4 entsprechende unterfunktionen anlegen...
 
-const args = process.argv.slice(2);
-args[0];
-const passwordName = args[0];
+const args = readCommandLineArguments();
 
-if (passwordName === "caro") {
-  console.log("Your password is boldCM");
-} else {
-  console.log("denied access");
-}
+const userName = args[0];
 
-const superSavePassword = "1234";
-
-const questionPassword = {
-  type: "password",
-  name: "masterPassword",
-  message: "What's your password?",
-};
-
-const questionForget = {
-  type: "input",
-  name: "passwordName",
-  message: "Which password did you forget?",
-};
+console.log(chalk.green("PWD-Manager"));
+console.log(chalk.green(`Hello ${userName} `));
 
 const questionNewEntry = {
   type: "list",
@@ -37,16 +29,11 @@ const questionNewEntry = {
 };
 
 async function validateAccess() {
-  const { masterPassword } = await inquirer.prompt(questionPassword);
-  if (masterPassword !== superSavePassword) {
-    console.error(chalk.red("Fake news!"));
-    // funktion hinzufügen, die den loop abbricht nach 3x falscheingabe..
-    validateAccess();
-    return;
-  }
-  const { passwordName } = await inquirer.prompt(questionForget);
+  await validateSuperSavePassword();
 
-  const passwordSafe = JSON.parse(fs.readFileSync("./db.json", "utf8"));
+  const passwordName = await runQuestionForget();
+
+  const passwordSafe = await readPasswordSafe();
 
   if (passwordSafe[passwordName]) {
     console.log(chalk.green(`Name: ${passwordSafe[passwordName].name}`));

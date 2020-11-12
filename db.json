@@ -7,10 +7,6 @@
     "name": "nameVercel",
     "pw": "pwVercel"
   },
-  "github": "pwGithub",
-  "facebook": "pwFacebook",
-  "telefon": "Some Password!",
-  "amazon": "shhopping",
   "mich": {
     "christian": "liebe"
   },
@@ -25,5 +21,8 @@
   },
   "waschbecken": {
     "waschen": "becken"
+  },
+  "haus": {
+    "haus": "schlüssel"
   }
 }
