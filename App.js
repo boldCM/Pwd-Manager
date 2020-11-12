@@ -6,6 +6,7 @@ const { readCommandLineArguments } = require("./lib/commandline");
 const { validateSuperSavePassword } = require("./lib/validation");
 const { runQuestionForget } = require("./lib/questionForget");
 const { readPasswordSafe } = require("./lib/accesDB");
+const Crypto = require("crypto-js");
 
 // Wie soll meine App aussehen?
 // 0unnötige Argumente nicht anzeigen
@@ -33,7 +34,7 @@ async function validateAccess() {
 
   const passwordName = await runQuestionForget();
 
-  const passwordSafe = await readPasswordSafe();
+  const passwordSafe = await readPasswordSafe(passwordName);
 
   if (passwordSafe[passwordName]) {
     console.log(chalk.green(`Name: ${passwordSafe[passwordName].name}`));

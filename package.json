@@ -5,6 +5,7 @@
   "main": "App.js",
   "private": "true",
   "dependencies": {
+    "crypto-js": "^4.0.0",
     "inquirer": "^7.3.3"
   },
   "devDependencies": {},
