@@ -16,5 +16,14 @@
   },
   "Zoom": {
     "zoom1": "1234"
+  },
+  "slack": {
+    "boldCM": "456"
+  },
+  "klo": {
+    "kacke": "555"
+  },
+  "waschbecken": {
+    "waschen": "becken"
   }
 }

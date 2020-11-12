@@ -1,5 +1,7 @@
 const chalk = require("chalk");
 const fs = require("fs");
+const { addEntry } = require("./lib/addEntry");
+const inquirer = require("inquirer");
 
 console.log("PWD-Manager");
 
@@ -12,8 +14,6 @@ if (passwordName === "caro") {
 } else {
   console.log("denied access");
 }
-
-const inquirer = require("inquirer");
 
 const superSavePassword = "1234";
 
@@ -34,23 +34,6 @@ const questionNewEntry = {
   name: "newEntry",
   message: "Do you want to add a new entry?",
   choices: ["yes", "no"],
-};
-
-const questionName = {
-  type: "input",
-  name: "answerName",
-  message: "What's the name?",
-};
-const questionPW = {
-  type: "input",
-  name: "answerPW",
-  message: "What's the pw?",
-};
-
-const questionTitle = {
-  type: "input",
-  name: "answerTitle",
-  message: "What's the entry for?",
 };
 
 async function validateAccess() {
@@ -80,25 +63,3 @@ async function validateAccess() {
   }
 }
 validateAccess();
-
-async function addEntry(passwordSafe) {
-  // const objectTitle= answerTitle;
-  const { answerTitle } = await inquirer.prompt(questionTitle);
-
-  const { answerName } = await inquirer.prompt(questionName);
-
-  const { answerPW } = await inquirer.prompt(questionPW);
-
-  const content = { [answerTitle]: { [answerName]: answerPW } };
-
-  try {
-    //file written successfully
-    console.log(chalk.green("Password Changed"));
-  } catch (err) {
-    console.error(err);
-  }
-
-  const newObject = Object.assign(passwordSafe, content);
-  const data = JSON.stringify(newObject, null, 2);
-  fs.writeFileSync("./db.json", data);
-}
