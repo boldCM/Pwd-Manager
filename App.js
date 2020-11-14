@@ -2,64 +2,51 @@ const chalk = require("chalk");
 const fs = require("fs");
 const { addEntry } = require("./lib/addEntry");
 const inquirer = require("inquirer");
+const { readCommandLineArguments } = require("./lib/commandline");
+const { validateSuperSavePassword } = require("./lib/validation");
+const { runQuestionForget, runQuestionNewEntry } = require("./lib/questions");
+const { getPassword, readPasswordSafe } = require("./lib/accesDB");
+const Crypto = require("crypto-js");
 
-console.log("PWD-Manager");
+// Wie soll meine App aussehen?
+// 0unnötige Argumente nicht anzeigen
+// 1 Name der App
+// 2 Abfrage des Masterpasswordes
+// 3 Will ich ein Password haben oder
+//    einen neuen Eintrag hinzufügen oder
+//    ein Password ändern oder
+//    einen Eintrag löschen
+// 4 entsprechende unterfunktionen anlegen...
 
-const args = process.argv.slice(2);
-args[0];
-const passwordName = args[0];
+const args = readCommandLineArguments();
 
-if (passwordName === "caro") {
-  console.log("Your password is boldCM");
-} else {
-  console.log("denied access");
-}
+const userName = args[0];
 
-const superSavePassword = "1234";
-
-const questionPassword = {
-  type: "password",
-  name: "masterPassword",
-  message: "What's your password?",
-};
-
-const questionForget = {
-  type: "input",
-  name: "passwordName",
-  message: "Which password did you forget?",
-};
-
-const questionNewEntry = {
-  type: "list",
-  name: "newEntry",
-  message: "Do you want to add a new entry?",
-  choices: ["yes", "no"],
-};
+console.log(chalk.green("PWD-Manager"));
+console.log(chalk.green(`Hello ${userName} `));
 
 async function validateAccess() {
-  const { masterPassword } = await inquirer.prompt(questionPassword);
-  if (masterPassword !== superSavePassword) {
-    console.error(chalk.red("Fake news!"));
-    // funktion hinzufügen, die den loop abbricht nach 3x falscheingabe..
-    validateAccess();
-    return;
-  }
-  const { passwordName } = await inquirer.prompt(questionForget);
+  await validateSuperSavePassword();
 
-  const passwordSafe = JSON.parse(fs.readFileSync("./db.json", "utf8"));
+  const passwordSafeRead = await readPasswordSafe();
 
-  if (passwordSafe[passwordName]) {
-    console.log(chalk.green(`Name: ${passwordSafe[passwordName].name}`));
-    console.log(chalk.green(`Password: ${passwordSafe[passwordName].pw}`));
+  const passwordName = await runQuestionForget();
 
-    const { newEntry } = await inquirer.prompt(questionNewEntry);
-    if (newEntry === "yes") {
-      addEntry(passwordSafe);
-    } else {
-      return;
-    }
-  } else {
+  if (!passwordSafeRead[passwordName]) {
     console.log(chalk.yellow("Unknown Password"));
+  }
+
+  if (passwordSafeRead[passwordName]) {
+    console.log(chalk.green(`Name: ${passwordSafeRead[passwordName].name}`));
+    const passwordSafe = await getPassword(passwordName);
+    console.log(chalk.green(`Password: ${passwordSafe}`));
+  }
+
+  const newEntry = await runQuestionNewEntry();
+  if (newEntry === "yes") {
+    await addEntry(passwordSafeRead);
+  } else {
+    return;
   }
 }
 validateAccess();
