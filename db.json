@@ -1,1 +1,12 @@
-"caro"
+{
+  "mich": {
+    "christian": "liebe"
+  },
+  "waschbecken": {
+    "waschen": "becken"
+  },
+  "haus": {
+    "haus": "schlüssel"
+  },
+  "blUME": { "TOPF": "ERDE" }
+}
