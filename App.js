@@ -28,15 +28,19 @@ console.log(chalk.green(`Hello ${userName} `));
 async function validateAccess() {
   await validateSuperSavePassword();
 
-  // const passwordName = await runQuestionForget();
-
   const passwordSafeRead = await readPasswordSafe();
 
-  // const passwordSafe = await getPassword(passwordName);
+  const passwordName = await runQuestionForget();
 
-  // if (passwordSafe[passwordName]) {
-  //   console.log(chalk.green(`Name: ${passwordSafe[passwordName].name}`));
-  //   console.log(chalk.green(`Password: ${passwordSafe[passwordName].pw}`));
+  if (!passwordSafeRead[passwordName]) {
+    console.log(chalk.yellow("Unknown Password"));
+  }
+
+  if (passwordSafeRead[passwordName]) {
+    console.log(chalk.green(`Name: ${passwordSafeRead[passwordName].name}`));
+    const passwordSafe = await getPassword(passwordName);
+    console.log(chalk.green(`Password: ${passwordSafe}`));
+  }
 
   const newEntry = await runQuestionNewEntry();
   if (newEntry === "yes") {
@@ -44,8 +48,5 @@ async function validateAccess() {
   } else {
     return;
   }
-  //  else {
-  //   console.log(chalk.yellow("Unknown Password"));
-  // }
 }
 validateAccess();

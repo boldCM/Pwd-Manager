@@ -1,6 +1,7 @@
 {
   "mich": {
-    "christian": "liebe"
+    "name": "christian",
+    "pw": "liebe"
   },
   "waschbecken": {
     "waschen": "becken"
@@ -8,5 +9,25 @@
   "haus": {
     "haus": "schlüssel"
   },
-  "blUME": { "TOPF": "ERDE" }
+  "blUME": {
+    "TOPF": "ERDE"
+  },
+  "zoom": {
+    "name": "zoomName",
+    "pw": "U2FsdGVkX1/YJIaVhbhifGgx+PrKSxjEks1rw9PHyV0="
+  },
+  "Matthias": {
+    "name": [
+      "meinBruder"
+    ],
+    "pw": "U2FsdGVkX1/EN27DwkLgp56O+OUJrQXI+31oIwJNDOo="
+  },
+  "Laura": {
+    "name": "LaurasName",
+    "pw": "U2FsdGVkX18aOH2aR0JA5qRVumWjhmBpowb8YcyccTU="
+  },
+  "Benji": {
+    "name": "BenjisName",
+    "pw": "U2FsdGVkX1+fIa5NdVVF8Y2BMe41TBcXl9wpPcbcyro="
+  }
 }
