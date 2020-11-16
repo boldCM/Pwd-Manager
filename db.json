@@ -1,25 +1,10 @@
 {
-  "mich": {
-    "name": "christian",
-    "pw": "liebe"
-  },
-  "waschbecken": {
-    "waschen": "becken"
-  },
-  "haus": {
-    "haus": "schlüssel"
-  },
-  "blUME": {
-    "TOPF": "ERDE"
-  },
   "zoom": {
     "name": "zoomName",
     "pw": "U2FsdGVkX1/YJIaVhbhifGgx+PrKSxjEks1rw9PHyV0="
   },
   "Matthias": {
-    "name": [
-      "meinBruder"
-    ],
+    "name": ["meinBruder"],
     "pw": "U2FsdGVkX1/EN27DwkLgp56O+OUJrQXI+31oIwJNDOo="
   },
   "Laura": {
@@ -29,5 +14,17 @@
   "Benji": {
     "name": "BenjisName",
     "pw": "U2FsdGVkX1+fIa5NdVVF8Y2BMe41TBcXl9wpPcbcyro="
+  },
+  "Christian": {
+    "name": "WasMagIch",
+    "pw": "U2FsdGVkX1/oEIT+uID1IYtGu+cf1Ad34dHRTkzKUn4="
+  },
+  "Krankenkasse": {
+    "name": "A12345",
+    "pw": "U2FsdGVkX1+vg8PRQJOBrdLWvjwMFxnt4vXKQKS0ZwU="
+  },
+  "kuh": {
+    "name": "milch",
+    "pw": "U2FsdGVkX1+l48G0Cvi5nesv1MccZhocshZzp82P56A="
   }
 }

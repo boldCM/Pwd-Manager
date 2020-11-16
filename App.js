@@ -1,12 +1,12 @@
 const chalk = require("chalk");
-const fs = require("fs");
 const { addEntry } = require("./lib/addEntry");
-const inquirer = require("inquirer");
 const { readCommandLineArguments } = require("./lib/commandline");
 const { validateSuperSavePassword } = require("./lib/validation");
 const { runQuestionForget, runQuestionNewEntry } = require("./lib/questions");
 const { getPassword, readPasswordSafe } = require("./lib/accesDB");
-const Crypto = require("crypto-js");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // Wie soll meine App aussehen?
 // 0unnötige Argumente nicht anzeigen
@@ -24,6 +24,10 @@ const userName = args[0];
 
 console.log(chalk.green("PWD-Manager"));
 console.log(chalk.green(`Hello ${userName} `));
+
+console.log(chalk.yellow("Connecting to MongoDB"));
+// funktion die zur MongoDB connected
+console.log(chalk.green("successfully connected to MongoDB, you're awesome!"));
 
 async function validateAccess() {
   await validateSuperSavePassword();
