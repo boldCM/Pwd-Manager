@@ -4,6 +4,7 @@ const { readCommandLineArguments } = require("./lib/commandline");
 const { validateSuperSavePassword } = require("./lib/validation");
 const { runQuestionForget, runQuestionNewEntry } = require("./lib/questions");
 const { getPassword, readPasswordSafe } = require("./lib/accesDB");
+const { connect } = require("./lib/database");
 const dotenv = require("dotenv");
 
 dotenv.config();
