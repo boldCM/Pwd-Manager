@@ -4,7 +4,7 @@ const { readCommandLineArguments } = require("./lib/commandline");
 const { validateSuperSavePassword } = require("./lib/validation");
 const { runQuestionForget, runQuestionNewEntry } = require("./lib/questions");
 const { getPassword, readPasswordSafe } = require("./lib/accesDB");
-const { connect } = require("./lib/database");
+const { connect, collection } = require("./lib/database");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -37,19 +37,10 @@ async function validateAccess() {
     chalk.green("successfully connected to MongoDB, you're awesome!")
   );
 
-  const passwordSafeRead = await readPasswordSafe();
+  const passwordSafeRead = await collection("passwords");
+  const passwordTitle = await runQuestionForget();
 
-  const passwordName = await runQuestionForget();
-
-  if (!passwordSafeRead[passwordName]) {
-    console.log(chalk.yellow("Unknown Password"));
-  }
-
-  if (passwordSafeRead[passwordName]) {
-    console.log(chalk.green(`Name: ${passwordSafeRead[passwordName].name}`));
-    const passwordSafe = await getPassword(passwordName);
-    console.log(chalk.green(`Password: ${passwordSafe}`));
-  }
+  await getPassword(passwordTitle);
 
   const newEntry = await runQuestionNewEntry();
   if (newEntry === "yes") {
