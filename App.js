@@ -25,12 +25,19 @@ const userName = args[0];
 console.log(chalk.green("PWD-Manager"));
 console.log(chalk.green(`Hello ${userName} `));
 
-console.log(chalk.yellow("Connecting to MongoDB"));
-// funktion die zur MongoDB connected
-console.log(chalk.green("successfully connected to MongoDB, you're awesome!"));
-
 async function validateAccess() {
   await validateSuperSavePassword();
+
+  console.log(chalk.yellow("Connecting to MongoDB"));
+  // funktion die zur MongoDB connected
+  await connect(
+    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.qazjp.mongodb.net/?retryWrites=true`,
+    "pw4u"
+  );
+
+  console.log(
+    chalk.green("successfully connected to MongoDB, you're awesome!")
+  );
 
   const passwordSafeRead = await readPasswordSafe();
 
