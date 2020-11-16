@@ -1,5 +1,5 @@
 const chalk = require("chalk");
-const { addEntry } = require("./lib/addEntry");
+const { addEntry, addToMongo } = require("./lib/addEntry");
 const { readCommandLineArguments } = require("./lib/commandline");
 const { validateSuperSavePassword } = require("./lib/validation");
 const { runQuestionForget, runQuestionNewEntry } = require("./lib/questions");
@@ -31,10 +31,7 @@ async function validateAccess() {
 
   console.log(chalk.yellow("Connecting to MongoDB"));
   // funktion die zur MongoDB connected
-  await connect(
-    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.qazjp.mongodb.net/?retryWrites=true`,
-    "pw4u"
-  );
+  await connect(process.env.DB_MONGODB_URI, process.env.DB_MONGODB_NAME);
 
   console.log(
     chalk.green("successfully connected to MongoDB, you're awesome!")
@@ -56,9 +53,10 @@ async function validateAccess() {
 
   const newEntry = await runQuestionNewEntry();
   if (newEntry === "yes") {
-    await addEntry(passwordSafeRead);
+    await addToMongo(passwordSafeRead);
   } else {
     return;
   }
+  // delete-Abfrage noch hinzufügen
 }
 validateAccess();

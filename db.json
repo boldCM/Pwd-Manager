@@ -26,5 +26,17 @@
   "kuh": {
     "name": "milch",
     "pw": "U2FsdGVkX1+l48G0Cvi5nesv1MccZhocshZzp82P56A="
+  },
+  "wifi": {
+    "name": "wifiName",
+    "pw": "U2FsdGVkX19ikqG2d68ZNGUAA15Mt9sfKERkAk10Q/w="
+  },
+  "Laptop": {
+    "name": "LaptopName",
+    "pw": "U2FsdGVkX1+ZTZx7H1LPQDZxFWgJHL5EBiv6hIpWTgs="
+  },
+  "Haus": {
+    "name": "Tür",
+    "pw": "U2FsdGVkX18zN+rk4exoiDdWi7qNCQyw2/XCfcOcdgI="
   }
 }
